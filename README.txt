@@ -18,3 +18,7 @@ Unggah dan timpa file index.html, styles.css, app.js, sw.js, manifest.webmanifes
 Perhitungan daftar belanja:
 Subtotal = jumlah × harga satuan.
 Total estimasi = jumlah seluruh subtotal dari barang yang belum ditandai sudah dibeli.
+
+Pembaruan logo 2.1:
+- Logo header dan ikon PWA menggunakan icon.png.
+- Unggah file index.html, styles.css, manifest.webmanifest, sw.js, dan icon.png terbaru ke root repository untuk mengganti logo lama.
