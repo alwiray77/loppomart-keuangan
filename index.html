@@ -4,7 +4,7 @@
 <header><div class="brand"><span class="logo">L</span><div><b>LoppoMart</b><small>KEUANGAN & OPERASIONAL</small></div></div><span id="connection" class="pill">Memeriksa…</span></header>
 <main>
 <section class="hero"><small>SALDO KAS AKHIR · TANGGAL TERPILIH</small><div id="cashEnd" class="big">Rp0</div><p id="cashNote">Mulai dengan mengisi catatan harian.</p></section>
-<nav><button class="tab active" data-tab="entry">Catat harian</button><button class="tab" data-tab="report">Laporan</button><button class="tab" data-tab="backup">Backup</button></nav>
+<nav><button class="tab active" data-tab="entry">Catat harian</button><button class="tab" data-tab="shopping">Daftar belanja</button><button class="tab" data-tab="report">Laporan</button><button class="tab" data-tab="backup">Backup</button></nav>
 <section id="entry" class="panel active"><h2>Catatan harian</h2><p class="muted">Satu catatan untuk setiap tanggal.</p>
 <form id="form">
 <label>Tanggal<input id="date" type="date" required></label>
@@ -17,8 +17,22 @@
 <div class="summary"><div><span>Estimasi laba kotor</span><b id="gross">Rp0</b></div><div><span>Estimasi laba operasional*</span><b id="profit">Rp0</b></div><div><span>Perubahan kas hari ini</span><b id="change">Rp0</b></div></div>
 <p class="fine">*Laba operasional = omzet − HPP − gaji − operasional. Belum termasuk biaya lain yang belum dicatat. Cicilan pokok mengurangi kas, bukan otomatis biaya laba.</p>
 <div class="actions"><button class="primary" type="submit">Simpan catatan</button><button class="secondary" type="button" id="clear">Kosongkan</button></div><p id="status" class="status"></p></form></section>
+
+<section id="shopping" class="panel"><h2>Daftar barang kosong</h2><p class="muted">Masukkan barang yang perlu dibeli. Jumlah dan harga satuan dihitung otomatis.</p>
+<form id="itemForm">
+<label>Nama barang<input id="itemName" type="text" placeholder="Contoh: Minyak goreng 1 liter" required></label>
+<div class="two"><label>Jumlah<input id="itemQty" type="number" min="1" step="1" value="1" required></label><label>Harga per barang (Rp)<input id="itemPrice" type="number" min="0" step="1" value="0" required></label></div>
+<label>Jadwal / sales<select id="itemSupplier"><option value="Sabtu - Sayap Mas">Sabtu - Sayap Mas</option><option value="Senin - Sayap Mas">Senin - Sayap Mas</option><option value="Sales lain">Sales lain</option><option value="Belanja sendiri">Belanja sendiri</option></select></label>
+<button class="primary wide" type="submit">+ Simpan barang ke daftar</button><p id="itemStatus" class="status"></p>
+</form>
+<div class="shopping-total"><small>ESTIMASI TOTAL BELANJA BARANG KOSONG</small><strong id="shoppingTotal">Rp0</strong><small id="shoppingCount">0 barang belum dibeli</small></div>
+<div class="filter-row"><label>Filter daftar<select id="shoppingFilter"><option value="Semua">Semua</option><option value="Sabtu - Sayap Mas">Sabtu - Sayap Mas</option><option value="Senin - Sayap Mas">Senin - Sayap Mas</option><option value="Sales lain">Sales lain</option><option value="Belanja sendiri">Belanja sendiri</option><option value="Sudah dibeli">Sudah dibeli</option></select></label></div>
+<div id="shoppingList" class="history">Belum ada barang.</div>
+<p class="fine">Daftar tersimpan otomatis di browser HP ini. Barang yang ditandai sudah dibeli tidak masuk total belanja yang belum dibeli. Data ikut masuk ke file backup.</p>
+</section>
+
 <section id="report" class="panel"><h2>Laporan bulanan</h2><label>Pilih bulan<input type="month" id="month"></label><div class="stats">
 <article><small>Total omzet</small><b id="rRevenue">Rp0</b></article><article><small>Total HPP</small><b id="rCogs">Rp0</b></article><article><small>Estimasi laba operasional</small><b id="rProfit">Rp0</b></article><article><small>Belanja stok dibayar</small><b id="rStock">Rp0</b></article><article><small>Bayar tagihan sales</small><b id="rSupplier">Rp0</b></article><article><small>Pengambilan pribadi</small><b id="rPersonal">Rp0</b></article></div><h3>Riwayat harian</h3><div id="history" class="history">Belum ada catatan.</div></section>
-<section id="backup" class="panel"><h2>Backup & data</h2><div class="tip warn">Catatan tersimpan di browser HP ini. Belum ada sinkronisasi cloud otomatis. Unduh backup secara berkala agar data tidak hilang.</div><button id="export" class="primary wide">Unduh backup (.json)</button><label class="file">Pulihkan backup (.json)<input id="import" type="file" accept=".json,application/json"></label><p id="backupStatus" class="status"></p><h3>Panduan singkat</h3><ul><li>Jangan hapus data Chrome sebelum membuat backup.</li><li>Belanja stok dan bayar tagihan sales dicatat terpisah.</li><li>Untuk memakai offline, buka aplikasi sekali saat internet tersedia.</li><li>Hosting HTTPS diperlukan agar bisa dipasang sebagai PWA dan cache offline aktif.</li></ul></section>
-<footer>LoppoMart Keuangan · Versi awal</footer>
+<section id="backup" class="panel"><h2>Backup & data</h2><div class="tip warn">Catatan harian dan daftar barang disimpan di browser HP ini. Belum ada sinkronisasi cloud otomatis. Unduh backup secara berkala agar data tidak hilang.</div><button id="export" class="primary wide">Unduh backup (.json)</button><label class="file">Pulihkan backup (.json)<input id="import" type="file" accept=".json,application/json"></label><p id="backupStatus" class="status"></p><h3>Panduan singkat</h3><ul><li>Jangan hapus data Chrome sebelum membuat backup.</li><li>Belanja stok dan bayar tagihan sales dicatat terpisah.</li><li>Untuk memakai offline, buka aplikasi sekali saat internet tersedia.</li><li>Backup mencakup catatan harian dan daftar barang kosong.</li></ul></section>
+<footer>LoppoMart Keuangan · Versi 2.0</footer>
 </main><script src="app.js"></script></body></html>
